@@ -1,0 +1,17 @@
+<div class="upload-container">
+  <h2>Upload de arquivos</h2>
+  <p>Selecione ou arraste um arquivo</p>
+  <div class="file-upload">
+    <label class="file-input">
+      <input type="file" (change)="onFileSelect($event)" accept=".rtn" />
+      <i class="pi pi-cloud-upload"></i> Selecionar arquivo
+    </label>
+    <p *ngIf="file">Arquivo selecionado:</p>
+  </div>
+  <button
+    pButton
+    label="Processar arquivo"
+    (click)="uploadFile()"
+    class="upload-button"
+  ></button>
+</div>
