@@ -1,16 +1,34 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgStyle } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
+import { DividerModule } from "primeng/divider";
 import { DropdownModule } from 'primeng/dropdown';
 
 @Component({
   selector: 'app-filter-bar',
   standalone: true,
-  imports: [CommonModule, FormsModule, CalendarModule, DropdownModule, ButtonModule],
+  imports: [
+    CommonModule, 
+    FormsModule, 
+    CalendarModule, 
+    DropdownModule, 
+    ButtonModule,
+    NgStyle,
+    DividerModule],
   template: `
+  <section>
+  <h2 [ngStyle]="{color: 'var(--primary-500)'}" class="text-5xl m-0">
+    Relatórios
+  </h2>
+  <h3 [ngStyle]="{color: 'var(--primary-800)'}" class="mt-2 mb-0">
+    Preencha o filtro para realizar uma pesquisa.
+  </h3>
+
+  <p-divider/>
+  <div class="flex gap-4 mt-5 w-full">
     <div class="filter-bar">
       <p-calendar [(ngModel)]="filter.date" placeholder="Data do aluguel"></p-calendar>
       <p-dropdown 
@@ -20,6 +38,8 @@ import { DropdownModule } from 'primeng/dropdown';
       </p-dropdown>
       <button pButton label="Buscar" (click)="onSearch()"></button>
     </div>
+  </div>
+  </section>
   `,
   styles: [`
     .filter-bar {
@@ -55,7 +75,7 @@ export class FilterBarComponent implements OnInit {
   }
 
   onSearch() {
-    
+    console.log('Filtro:', this.filter);
     this.filterChange.emit(this.filter);
   }
 }

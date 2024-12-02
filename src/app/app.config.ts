@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 // import { KeycloakService } from 'keycloak-angular';
 // import { AuthGuard } from './core/auth/auth.guard';
 import { provideHttpClient } from '@angular/common/http';
+import { MessageService } from 'primeng/api';
 
 
 export const appConfig: ApplicationConfig = {
@@ -12,6 +13,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimations(),
     provideHttpClient(),
+    MessageService
     // AuthGuard,
     // {
     //   provide: APP_INITIALIZER,

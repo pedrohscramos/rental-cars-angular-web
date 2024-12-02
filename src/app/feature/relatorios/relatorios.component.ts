@@ -8,8 +8,11 @@ import { ReportTableComponent } from '../../shared/components/report-table/repor
   standalone: true,
   imports: [FilterBarComponent, ReportTableComponent],
   template: 
-        `<app-filter-bar (filterChange)="loadReports($event)"></app-filter-bar>
-        <app-report-table [reports]="reports"></app-report-table>`
+        `
+        <div class="flex flex-column gap-3 pl-3 pr-3">
+        <app-filter-bar (filterChange)="loadReports($event)"></app-filter-bar>
+        <app-report-table [reports]="reports"></app-report-table>
+        </div>`
 })
 export class RelatoriosComponent implements OnInit {
 
@@ -19,13 +22,13 @@ export class RelatoriosComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.loadReports({});
+    this.loadReports({date:null, model:null});
   }
 
   loadReports(filter: any) {
     const params = {
-      date: filter.date ? filter.date.toISOString().split('T')[0] : '',
-      model: filter.model || ''
+      date: filter.date ? filter.date.toISOString().split('T')[0] : null,
+      model: filter.model || null
     };
 
     this.http.get<any>('http://localhost:8080/api/alugueis', { params }).subscribe({
